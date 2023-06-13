@@ -38,64 +38,64 @@
                 </div>
             </div>
         </div>
+    </div>
+    <script>
+        let welcome = document.querySelector(".welcome");
+        setTimeout(function () {
+            welcome.style.display = "none";
+        }, 5000)
 
-        <script>
-            let welcome = document.querySelector(".welcome");
-            setTimeout(function () {
-                welcome.style.display = "none";
-            }, 5000)
+        function icon() {
+            this.classList.add("fa-angle-right")
+        }
+        const btn = document.querySelector('div .btn');
+        // Create a new HTML table element
+        const table = document.createElement("table");
+        btn.disabled = false;
+        // Add table rows for each multiplication key.datasets from 1 to 10
+        btn.addEventListener('click', () => {
 
-            // function icon() {
-            //     console.log(this)
-            // }
-            const btn = document.querySelector('div .btn');
-            // Create a new HTML table element
-            const table = document.createElement("table");
-            btn.disabled = false;
-            // Add table rows for each multiplication key.datasets from 1 to 10
-            btn.addEventListener('click', () => {
+            document.querySelector(".main #output").classList.add("active");
+            // Get the input number from the user
+            const num = document.querySelector('.main .data .inp').value;
+            for (let i = 1; i <= 10; i++) {
+                const result = num * i;
 
-                document.querySelector(".main #output").classList.add("active");
-                // Get the input number from the user
-                const num = document.querySelector('.main .data .inp').value;
-                for (let i = 1; i <= 10; i++) {
-                    const result = num * i;
+                // Create a new table row and cell
+                const row = document.createElement("tr");
+                const cell1 = document.createElement("td");
 
-                    // Create a new table row and cell
-                    const row = document.createElement("tr");
-                    const cell1 = document.createElement("td");
+                // Set the content of the table cell
+                cell1.textContent = `${num} x ${i} = ${result}`;
 
-                    // Set the content of the table cell
-                    cell1.textContent = `${num} x ${i} = ${result}`;
+                // Add the cell to the row
+                row.appendChild(cell1);
 
-                    // Add the cell to the row
-                    row.appendChild(cell1);
-
-                    // Add the row to the table
-                    table.appendChild(row);
-                }
-
-                // Get the output element and add the table to it
-                const output = document.getElementById("output");
-                output.appendChild(table);
-                btn.disabled = true;
-            })
-
-            const delbtn = document.querySelector('div .delbtn');
-            delbtn.addEventListener("click", () => {
-                document.querySelector("div #output").classList.remove("active");
-                table.innerHTML = ""
-                btn.disabled = false;
-            })
-
-
-
-            function color(z) {
-                var a = getComputedStyle(z);
-                var b = a.background;
-                document.getElementsByTagName("body")[0].style.background = b;
+                // Add the row to the table
+                table.appendChild(row);
             }
-        </script>
+
+            // Get the output element and add the table to it
+            const output = document.getElementById("output");
+            output.appendChild(table);
+            btn.disabled = true;
+        })
+
+        const delbtn = document.querySelector('div .delbtn');
+        delbtn.addEventListener("click", () => {
+            document.querySelector("div #output").classList.remove("active");
+            table.innerHTML = ""
+            btn.disabled = false;
+        })
+
+
+
+        function color(z) {
+            var a = getComputedStyle(z);
+            var b = a.background;
+            document.getElementsByTagName("body")[0].style.background = b;
+        }
+    </script>
 </body>
 
 </html>
@@ -129,8 +129,7 @@
     }
 
     .main {
-        height: 100vh;
-        overflow: hidden;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -184,24 +183,21 @@
         /* background: red; */
         display: flex;
         height: 100%;
-        width: 250px;
+        width: 100%;
         flex-direction: column-reverse;
         margin-top: 2%;
         font-size: 1.5rem;
     }
 
     .main #output table {
-        /* background-color: orange; */
+        /* background: orange; */
         margin: 10px;
+        outline: 2px solid black;
     }
 
     .main #output .delbtn {
         width: 200px;
         margin: auto;
-    }
-
-    table {
-        outline: 2px solid black;
     }
 
     table tr {
@@ -313,11 +309,5 @@
 
     .clr6 {
         background: linear-gradient(to right top, #0071ff, #895eeb, #bc46cd, #db2aaa, #eb1285);
-    }
-
-    @media screen and (max-width:800px) {
-        .welcome {
-            /* font-size: 2rem; */
-        }
     }
 </style>
