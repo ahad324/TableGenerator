@@ -45,9 +45,9 @@
             welcome.style.display = "none";
         }, 5000)
 
-        var icon = document.querySelector(".icon")
+      var icon = document.querySelector("label")
         icon.addEventListener("click", () => {
-            icon.classList.toggle('fa-angle-left')
+            document.querySelector("label .icon").classList.toggle('fa-angle-left')
         })
 
         const btn = document.querySelector('div .btn');
