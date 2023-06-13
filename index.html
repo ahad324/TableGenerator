@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/7bfc8cee80.js"></script>
+    <title>TableGenerator</title>
+</head>
+
+<body>
+    <div class="welcome">
+        <h1>Welcome to Mutiplication-Table-Generator</h1>
+    </div>
+    <div class="main">
+        <div class="data">
+            <input type="number" name="text" class="inp" required>
+            <button class="btn">Get Table</button>
+
+        </div>
+        <div class="response">
+            <div id="output"><button class="delbtn">delete Table</button></div>
+            <div class="colors">
+                <input type="checkbox" name="" id="side-menu-switch">
+                <div class="side-menu">
+                    <span onclick="color(this)" class="clr1"></span>
+                    <span onclick="color(this)" class="clr2"></span>
+                    <span onclick="color(this)" class="clr3"></span>
+                    <span onclick="color(this)" class="clr4"></span>
+                    <span onclick="color(this)" class="clr5"></span>
+                    <span onclick="color(this)" class="clr6"></span>
+                    <label for="side-menu-switch">
+                        <i onclick="icon()" class="fas fa-angle-left"></i>
+                    </label>
+
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let welcome = document.querySelector(".welcome");
+            setTimeout(function () {
+                welcome.style.display = "none";
+            }, 5000)
+
+            // function icon() {
+            //     console.log(this)
+            // }
+            const btn = document.querySelector('div .btn');
+            // Create a new HTML table element
+            const table = document.createElement("table");
+            btn.disabled = false;
+            // Add table rows for each multiplication key.datasets from 1 to 10
+            btn.addEventListener('click', () => {
+
+                document.querySelector(".main #output").classList.add("active");
+                // Get the input number from the user
+                const num = document.querySelector('.main .data .inp').value;
+                for (let i = 1; i <= 10; i++) {
+                    const result = num * i;
+
+                    // Create a new table row and cell
+                    const row = document.createElement("tr");
+                    const cell1 = document.createElement("td");
+
+                    // Set the content of the table cell
+                    cell1.textContent = `${num} x ${i} = ${result}`;
+
+                    // Add the cell to the row
+                    row.appendChild(cell1);
+
+                    // Add the row to the table
+                    table.appendChild(row);
+                }
+
+                // Get the output element and add the table to it
+                const output = document.getElementById("output");
+                output.appendChild(table);
+                btn.disabled = true;
+            })
+
+            const delbtn = document.querySelector('div .delbtn');
+            delbtn.addEventListener("click", () => {
+                document.querySelector("div #output").classList.remove("active");
+                table.innerHTML = ""
+                btn.disabled = false;
+            })
+
+
+
+            function color(z) {
+                var a = getComputedStyle(z);
+                var b = a.background;
+                document.getElementsByTagName("body")[0].style.background = b;
+            }
+        </script>
+</body>
+
+</html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'ubuntu', sans-serif;
+        text-align: center;
+    }
+
+    body {
+        background: white;
+        overflow: hidden;
+    }
+
+
+    .welcome {
+        position: absolute;
+        background: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        z-index: 9;
+    }
+
+    .main {
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        overflow: hidden;
+    }
+
+    .main .data input {
+        max-width: 190px;
+        padding: 10px;
+        margin: 10px;
+        border: none;
+        border-radius: 4px;
+        box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
+        outline: none;
+        font-size: 1.5rem;
+    }
+
+    button {
+        border-radius: .25rem;
+        text-transform: uppercase;
+        font-style: normal;
+        font-weight: 400;
+        padding-left: 25px;
+        padding-right: 25px;
+        color: #fff;
+        -webkit-clip-path: polygon(0 0, 0 0, 100% 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 100%);
+        clip-path: polygon(0 0, 0 0, 100% 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 100%);
+        height: 40px;
+        font-size: 0.7rem;
+        line-height: 14px;
+        letter-spacing: 1.2px;
+        transition: .2s .1s;
+        background-image: linear-gradient(90deg, #1c1c1c, #6220fb);
+        border: 0 solid;
+        overflow: hidden;
+    }
+
+    button:hover {
+        cursor: pointer;
+        transition: all .3s ease-in;
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    .main #output {
+        display: none;
+    }
+
+    .main #output.active {
+        /* background: red; */
+        display: flex;
+        height: 100%;
+        width: 250px;
+        flex-direction: column-reverse;
+        margin-top: 2%;
+        font-size: 1.5rem;
+    }
+
+    .main #output table {
+        /* background-color: orange; */
+        margin: 10px;
+    }
+
+    .main #output .delbtn {
+        width: 200px;
+        margin: auto;
+    }
+
+    table {
+        outline: 2px solid black;
+    }
+
+    table tr {
+        outline: 2px solid black;
+        text-align: center;
+        font-weight: 500;
+        color: black;
+    }
+
+    table tr td {
+        padding: 10px;
+    }
+
+
+    .side-menu {
+        width: 50px;
+        height: 200px;
+        top: 25%;
+        align-items: center;
+        padding: 6px 0;
+        flex-direction: column;
+        box-sizing: border-box;
+        justify-content: space-between;
+        background-image: linear-gradient(0deg, #3381b0, #87cefa);
+        display: flex;
+        box-shadow: 5px 0px 10px rgba(17, 26, 41, 0.6);
+        position: absolute;
+        left: 100%;
+        border-radius: 10px 0 10px 10px;
+        transition: .5s;
+        /* transform: translateX(0); */
+    }
+
+    .side-menu form {
+        display: flex;
+        margin: 0 10px 50px;
+        border-radius: 100px;
+        border: 1px solid #fff;
+
+    }
+
+    .side-menu form input,
+    .side-menu form button {
+        background-color: transparent;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+    }
+
+    .side-menu form input {
+        width: 230px;
+    }
+
+    .side-menu label {
+        position: absolute;
+        width: 40px;
+        height: 50px;
+        background: #000;
+        color: #fff;
+        right: 50px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        line-height: 50px;
+        text-align: center;
+        font-size: 30px;
+        border-radius: 10px 0px 0 10px;
+    }
+
+    #side-menu-switch {
+        position: absolute;
+        opacity: 0;
+    }
+
+    #side-menu-switch:checked+.side-menu {
+        transform: translateX(-100%);
+    }
+
+    span {
+        width: 30px;
+        display: block;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .clr1 {
+        background: linear-gradient(to left bottom, #05ec40, #00eb60, #00ea7a, #00e88f, #00e5a1, #00ddc1, #00d4d6, #00c8e0, #00b0fa, #0093ff, #006aff, #6200f6);
+    }
+
+    .clr2 {
+        background: linear-gradient(to left bottom, #ecd305, #ffab0c, #ff7e37, #ff505b, #ff267f, #f61a96, #e720ae, #d130c6, #c23ed5, #af4ae3, #9755f0, #795ffb);
+
+    }
+
+    .clr3 {
+        background: linear-gradient(to left bottom, #08ff3f, #69f929, #91f313, #afed00, #c7e601, #e4cd00, #f7b31c, #ff9b39, #fd705f, #de5581, #a75097, #605097);
+
+    }
+
+    .clr4 {
+        background: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+
+    }
+
+    .clr5 {
+        background: linear-gradient(to right top, #1dff06, #00fd69, #00f999, #00f3bc, #12ebd3);
+        ;
+    }
+
+    .clr6 {
+        background: linear-gradient(to right top, #0071ff, #895eeb, #bc46cd, #db2aaa, #eb1285);
+    }
+
+    @media screen and (max-width:800px) {
+        .welcome {
+            /* font-size: 2rem; */
+        }
+    }
+</style>
